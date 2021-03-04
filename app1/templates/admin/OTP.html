@@ -1,0 +1,16 @@
+
+<div>
+    <a class="link-btn">Check Your Email Id For OTP</a>
+    
+</div>
+<div>
+    <form method="POST" action="{% url 'otpcheck' %}">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="otp" id="id_otp" placeholder="Enter OTP Here">
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>     
+</div>

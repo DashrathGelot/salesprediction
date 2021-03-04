@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<link href="{% static 'graph/css/style.css' %}">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>GRAPH</title>
+		<meta name="description" content="Animated Checkboxes and Radio Buttons with SVG: Using SVG for adding some fancy 'check' animations to form inputs" />
+		<meta name="keywords" content="animated checkbox, svg, radio button, styled checkbox, css, pseudo element, form, animated svg" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="{% static 'graph/../favicon.ico' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'graph/css/normalize.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'graph/css/demo.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'graph/css/component.css' %}" />
+		<script src="{% static 'graph/js/modernizr.custom.js' %}"></script>
+        <script src="{% static 'graph/js/svgcheckbx.js' %}"></script>
+	</head>
+    <body>  
+        
+        <h4 id='alldata'></h4><br> 
+        <div id="container"></div>
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script>
+    
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Graph of Sales'
+        },
+        xAxis: {
+            categories: [{% for x,y in data.items %}'{{ y|escapejs }}',{% endfor %}]
+        },
+         series: [
+        {
+            name: 'Shop keepers Sales',
+            data: [{% for x,y in data.items %} {{ x|escapejs }},{% endfor %}]
+        }]
+    });
+  </script>
+  
+    </body>
+</html>

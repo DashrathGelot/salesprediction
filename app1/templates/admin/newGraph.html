@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Sales Graph</title>
+  </head>
+  <body>
+    <form method="POST">
+      {% csrf_token %}
+      <select name="store" id="store">
+        <option disabled selected>Select Store</option>
+        {% for s in store %}
+        <option value="{{s}}">{{s}}</option>
+        {% endfor %}
+      </select>
+
+      <select name="product" id="product">
+        <option disabled selected>Select Product</option>
+        {% for p in product %}
+        <option value="{{p}}">{{p}}</option>
+        {% endfor %}
+      </select>
+
+      <input
+        type="number"
+        min="2021"
+        max="2025"
+        name="year"
+        id="year"
+        placeholder="select prediction year"
+        required
+      />
+      <button type="submit">Submit</button>
+    </form>
+
+    <div>
+      {% if no_data %}
+      <span>Sorry, No sells Data available.</span>
+      {% else %}
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Quantity</th>
+        </tr>
+        {% for d in data %}
+        <tr>
+          <td>{{d.0}}</td>
+          <td>{{d.1}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endif %} {% if not no_data %}
+    <div>{% autoescape off %} {{ plot_div }} {% endautoescape %}</div>
+    {% endif %}
+  </body>
+</html>

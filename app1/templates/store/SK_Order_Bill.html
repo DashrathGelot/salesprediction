@@ -1,0 +1,37 @@
+<h2>Bill No : {{ billNo }}</h2>
+
+Store Name : = {{ sperson.StoreName }}<br>
+Store Person Name : = {{ sperson.PersonName }}<br>
+Store Contact No : = {{ sperson.Contact }}<br>
+Store Email : = {{ sperson.email }}<br>
+Store Address : = {{ sperson.add1 }}<br>
+
+
+{{ ddate }}
+<table border="2">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product QTY</th>
+            <th>Product Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in BillDes %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.pd_nm }}</td>
+                <td>{{ i.pd_price }}</td>
+                <td>{{ i.pd_qty }}</td>
+                <td>{{ i.pd_tot }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="4">Payeble Amount </td>
+            <td>{{ tot }}</td>
+        </tr>
+    </tbody>
+</table>
+<td><a href="{% url 'sk_create_pdf' billNo %}">View Bill</a></td>

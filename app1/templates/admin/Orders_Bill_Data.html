@@ -1,0 +1,80 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+{% block content3 %}
+
+
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">product Edit Page</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'AdminDashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'viewstock' %}">view stock</a></li>
+                    <li class="active">product Edit Page</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- .row -->
+        <div class="row">
+           
+            <div class="col-md-8 col-xs-12">
+                <div class="white-box">
+                    <table border="2">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Store Name</th>
+                                <th>Bill Ids</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in data.values %}
+                                {% for j,k in i.items %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ j }}</td>
+                                        <td>
+                                            {% for bi in k %}
+                                                <a href="{% url 'admin_sk_create_pdf' bi %}">{{ bi }}</a><br>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    <footer class="footer text-center"> 2020 &copy; Sales Prediction Panel </footer>
+</div>
+
+
+<body>
+    <br><br><br>
+<div  style="margin-left: 14.7%;">
+    <!-- {{ data }} -->
+    
+
+    {% comment %}
+    {% for i in data %}
+    <h2><a href="{% url 'sk_create_pdf' i.Bill_No  %}">{{ i.Bill_No }}</a></h2>
+{% endfor %}  
+    {% endcomment %}
+    
+
+
+</div>
+</body>
+{% endblock %}

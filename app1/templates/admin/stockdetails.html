@@ -1,0 +1,44 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+<html>
+    <body>
+
+
+<div class="table-responsive">
+    {% block content1 %}
+    <div class="container">
+        <table class="table" style="margin-left: 15.7%;">
+            <thead>
+                <tr>
+                    <!-- <th>#</th> -->
+                    <th>stock name</th>
+                    <!-- <th>shopkeeper Name</th> -->
+                    <th>quantity</th>
+                    <th>Price</th>
+                    
+                    <!-- <th>Action</th> -->
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in data %}
+                <tr>
+                    <!-- <td>{{ i.id }}</td> -->
+                    <td class="txt-oflo">{{ i.productName }}</td>
+                    <td>{{ i.quantity }}</td>
+                    <td>{{ i.price }}</td>
+                    <td><a href="{% url 'editstock' i.id %}">Edit</a></td>
+                    <!-- <td>{{ i.email }}</td> -->
+                
+                    <!-- <td><a href = "/storedelete/{{ i.id }}">Delete</a> <a href = "/storeview/{{ i.id }}">View</a> <a href = "/storeedit/{{ i.id }}">Edit</a></td> -->
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</div>
+
+</body>
+</html>
+

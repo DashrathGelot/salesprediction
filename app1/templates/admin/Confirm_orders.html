@@ -1,0 +1,73 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+{% block content3 %}
+<body>
+    <br><br><br>
+<div  style="margin-left: 14.7%;">
+<table   class="table" height="200px"; width="400px" style="text-align: center;border-style: solid;">
+    <thead>
+        <tr>
+            <th style="text-align: center;font-weight: bold;"> Name </th>
+            <th style="text-align: center;font-weight: bold;"> Quantity </th>
+            <th style="text-align: center;font-weight: bold;"> Total Products </th>
+            <th style="text-align: center;font-weight: bold;"> Total Price </th>
+            <th style="text-align: center;font-weight: bold;"></th>
+        </tr>
+    </thead>
+    <tbody> 
+        {% for i,j in orders.items %}
+       
+        <tr>
+            <td>{{ i }}</td>
+            <td>{{ j.prod_qty }}</td>
+            <td>{{ j.qty }}</td>
+            <td>{{ j.prod_price }}</td>
+            
+            {% if j.show %}
+                <td><a href="{% url 'create_pdf' i %}">Bill Data</a></td>
+            {% else %}
+                <td><a href="{% url 'billdata' i %}">Bill Data</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</body>
+{% endblock %}
+
+
+<!-- 
+{% comment %}
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+{% block content3 %}
+<body>
+    <br><br><br>
+<div  style="margin-left: 14.7%;">
+<table   class="table" height="200px"; width="400px" style="text-align: center;border-style: solid;">
+    <thead>
+        <tr>
+            <th style="text-align: center;font-weight: bold;"> Name </th>
+            <th style="text-align: center;font-weight: bold;"> Quantity </th>
+            <th style="text-align: center;font-weight: bold;"> P_Name </th>
+            <th style="text-align: center;font-weight: bold;"> Date </th>
+        </tr>
+    </thead>
+    <tbody> 
+        {% for i in orders %}
+       
+        <tr>
+            <td>{{ i.store_person }}</td>
+            <td>{{ i.productquantity }}</td>
+            <td>{{ i.productname }}</td>
+            <td>{{ i.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</body>
+{% endblock %}
+{% endcomment %}
+     -->

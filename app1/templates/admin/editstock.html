@@ -1,0 +1,32 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+{% block content3 %}  
+<body>
+  <br><br><br>
+<div  style="margin-left: 14.7%;">
+  <!-- {{ data }} -->
+  
+<div class="container">
+    <h1>Edit StockInformation</h1><br>
+    <form method="POST" onsubmit="alert('StockInformation Editted successfully');">
+        {% csrf_token %}
+        <div class="form-group">
+          
+          <input type="text"  class="form-control" name="productName" id="id_productName" style="width: 40%;" value="{{ prod.productName }}">
+        </div>
+        <div class="form-group">
+          
+          <input type="number" class="form-control" name="quantity" id="id_quantity" style="width: 40%;" value="{{ prod.quantity }}">
+        </div>
+        <div class="form-group">
+          
+            <input type="number"  class="form-control" name="price" id="id_email" style="width: 40%;" value="{{ prod.price }}">
+          </div>
+        <div class="form-group">
+          
+            
+        <button type="submit" class="btn btn-success">edit changes</button>
+      </form> 
+</div>
+</body>
+{% endblock %}
