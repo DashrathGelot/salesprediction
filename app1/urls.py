@@ -40,6 +40,7 @@ urlpatterns = [
     path('viewstock/', viewstock, name='viewstock'),
     path('editstock/<int:id>', editstock, name='editstock'),
     path('accept_data/<int:sk>/<int:id>/', accepteddata, name='accept_data'),
+    path('denied_data/<int:sk>/<int:id>/', denieddata, name='denied_data'),
     path('salefilter/', SalefilterView, name='SalefilterView'),
     path('storesales/', GraphCall, name='storesales'),
     path('monthsale/', monthsaleview, name='monthsaleview'),

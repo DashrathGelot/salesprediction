@@ -46,6 +46,7 @@ class ProductDetails(models.Model):
     productquantity = models.IntegerField()
     date = models.DateField(auto_now=False,blank=True,null=True)
     status = models.BooleanField(default=False)
+    isDeny = models.BooleanField(default=False)
     Bills_id = models.CharField(max_length = 200,default="",null=True,blank=True)
 
     def __str__(self):

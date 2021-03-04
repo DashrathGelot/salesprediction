@@ -59,7 +59,7 @@
                         <td>
                             {% if i|qty_check %}
                                 <a class="button" style="background-color:rgb(30, 175, 17);color:black;" href="{% url 'accept_data' data.id i.id %}">Accept</a>
-                                <a class="button" style="background-color:red;color:black;" href="#">Deny</a>
+                                <a class="button" style="background-color:red;color:black;" href="{% url 'denied_data' data.id i.id %}">Deny</a>
                             {% else %}
                                 <a class="button" style="background-color:red;color:black;" href="#">Deny</a>
                             {% endif %}

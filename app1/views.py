@@ -124,6 +124,20 @@ def LoginView(request):
     return render(request, 'store/login.html')
 
 
+class ProductViewData():
+    def __init__(self, name, date, status):
+        self.name = name
+        self.date = date
+        self.status = status
+
+def getStatusInStr(isStatus, isDeny):
+    if isStatus == True:
+        return "Accepted"
+    else:
+        if isDeny == True:
+            return "Denied"
+        return "Pending"
+
 def Dashboard(request):
     if request.session.has_key('username'):
         username = request.session['username']
@@ -147,7 +161,8 @@ def Dashboard(request):
         today_date = date.today
         print(today_date)
 
-        acceptedData = obj = ProductDetails.objects.filter(status=True, store_person=store)
+        acceptedData = ProductDetails.objects.filter(store_person=store)
+        acceptedData = map(lambda product: ProductViewData(getattr(product, 'productname'), getattr(product, 'date'), getStatusInStr(getattr(product, 'status'), getattr(product, 'isDeny'))), acceptedData)
 
         for i in today_stock:
             qty += i.productquantity
@@ -748,7 +763,7 @@ def viewstore(request, id):
 
     if request.session.has_key('auser'):
         model = StoreDetails.objects.get(id=id)
-        prods = ProductDetails.objects.filter(store_person=model, status=False)
+        prods = ProductDetails.objects.filter(store_person=model, status=False, isDeny=False)
         return render(request, 'admin/storedetails.html', {'data': model, 'prod': prods})
     else:
         return redirect('Adminlogin')
@@ -857,6 +872,26 @@ def accepteddata(request, sk, id):
     print("=============================================")
     return redirect('viewstore', sk)
 
+
+def denieddata(request, sk, id):
+    print("=============================================")
+    print(f"shope = {sk} -----  prod{id}")
+    p_qty = 0
+    p_nm = ""
+    obj = ProductDetails.objects.get(id=id)
+    obj.isDeny = True
+    obj.status = False
+    p_nm = obj.productname
+    p_qty = obj.productquantity
+    obj.save()
+
+    print(obj)
+    product_obj = StockDetails.objects.get(productName=p_nm)
+    print(product_obj)
+    product_obj.quantity -= p_qty
+    product_obj.save()
+    print("=============================================")
+    return redirect('viewstore', sk)
 
 def Confirm_Orders(request):
     obj = ProductDetails.objects.filter(status=True)
